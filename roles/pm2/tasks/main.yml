@@ -28,7 +28,9 @@
       ansible.builtin.shell: pm2 start index.js --name backend --watch --ignore-watch="node_modules uploads"
       args:
         chdir: /var/www/trur/
-
+# Если PM2 следит за изменениями в папке с загруженными файлами, 
+# он может перезапускать сервер при каждом сохранении файла
+# добавили ignore-watch для папки uploads
 
     - name: Start Express server with nohup
       ansible.builtin.shell: nohup node index.js > output.log 2>&1 &
